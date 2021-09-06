@@ -5,5 +5,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class TypeName(
     val type: String,
-    val name: String
+    val name: Localization
 )

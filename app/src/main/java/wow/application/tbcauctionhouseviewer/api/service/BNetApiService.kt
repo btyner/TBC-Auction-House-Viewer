@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
+import wow.application.tbcauctionhouseviewer.MainApplication
 import wow.application.tbcauctionhouseviewer.api.model.TokenResponse
 import wow.application.tbcauctionhouseviewer.model.*
 import wow.application.tbcauctionhouseviewer.utilities.Constants
@@ -18,6 +19,7 @@ private val moshi = Moshi.Builder()
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(Constants.BASE_URL)
+    .client(okhttpClient(MainApplication.applicationContext()))
     .build()
 
 /**
@@ -30,6 +32,7 @@ private fun okhttpClient(context: Context): OkHttpClient {
 }
 
 interface BNetApiService {
+
     @POST(Constants.TOKEN_URL)
     @FormUrlEncoded
     suspend fun getToken(

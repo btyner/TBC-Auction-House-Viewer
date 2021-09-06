@@ -10,5 +10,5 @@ data class Realm(
     val status: TypeName,
     val population: TypeName,
     val realms: List<RealmInfo>,
-    val auctions: Link
+    val auctions: Link?
 )

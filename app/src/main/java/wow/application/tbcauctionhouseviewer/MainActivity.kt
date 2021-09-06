@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sessionManager = SessionManager(this)
+        sessionManager = SessionManager(MainApplication.applicationContext())
 
         val navView: BottomNavigationView = binding.navView
 

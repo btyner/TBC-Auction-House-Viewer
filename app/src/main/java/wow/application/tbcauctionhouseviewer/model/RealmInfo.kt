@@ -6,10 +6,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class RealmInfo(
     val id: Int,
-    val region: Region,
-    @Json(name = "connected_realm") val connectedRealm: Link,
-    val name: String,
-    val category: String,
+    val region: KeyNameId,
+    @Json(name = "connected_realm") val connectedRealm: Link?,
+    val name: Localization,
+    val category: Localization,
     val locale: String,
     val timezone: String,
     val type: TypeName,
