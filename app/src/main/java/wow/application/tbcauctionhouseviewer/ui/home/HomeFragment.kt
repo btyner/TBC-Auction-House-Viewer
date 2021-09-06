@@ -8,6 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import wow.application.tbcauctionhouseviewer.MainApplication
 import wow.application.tbcauctionhouseviewer.R
 import wow.application.tbcauctionhouseviewer.databinding.FragmentHomeBinding
 
@@ -24,7 +28,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -35,6 +39,19 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val realmListView: RecyclerView = binding.realmList
+        realmListView.layoutManager = LinearLayoutManager(MainApplication.applicationContext())
+        realmListView.addItemDecoration(
+            DividerItemDecoration(
+                MainApplication.applicationContext(),
+                RecyclerView.VERTICAL
+            )
+        )
+        homeViewModel.realms.observe(viewLifecycleOwner, Observer {
+            realmListView.adapter = RealmListAdapter(it)
+        })
+
         return root
     }
 
